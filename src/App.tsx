@@ -32,6 +32,75 @@ const SERVICES = [
   },
 ];
 
+const BUTTON = {
+  primary:
+    "bg-[#ff3030] text-white hover:brightness-110 hover:-translate-y-0.5",
+  secondary: "border border-[#2a2a2a] hover:bg-[#181818]",
+  accent: "border border-[#ff3030]/30 text-[#ff3030] hover:bg-[#ff3030]/10",
+};
+
+const SPOTLIGHTS = [
+  {
+    id: "marketplace",
+    num: "01 / SHOPPING",
+    title: "DezenMart — a marketplace you can shop with confidence",
+    desc: "Discover products from vendors across categories and check out in one place. When your order is ready, DezenExpress can bring it to your door.",
+    actions: [
+      { label: "Start Shopping →", href: MARKETPLACE_URL, variant: "primary" },
+    ],
+    features: [
+      { icon: "🛍️", label: "Browse Products", desc: "Many categories" },
+      { icon: "🏪", label: "Vendor Stores", desc: "Shop from sellers" },
+      { icon: "🚚", label: "Get it Delivered", desc: "Via DezenExpress" },
+      { icon: "👤", label: "One Account", desc: "Your Dezen identity" },
+    ],
+  },
+  {
+    id: "foods",
+    num: "02 / FOOD",
+    title: "DezenFoods — meals and groceries, sorted",
+    desc: "Order meals, groceries and everyday food from your favourite vendors. Your order is picked up and delivered, so you can stay where you are.",
+    actions: [
+      { label: "Order Food →", href: FOOD_URL, variant: "primary" },
+    ],
+    features: [
+      { icon: "🍲", label: "Order Meals", desc: "Favourite vendors" },
+      { icon: "🛒", label: "Groceries", desc: "Everyday essentials" },
+      { icon: "🛵", label: "Pickup & Delivery", desc: "Via DezenExpress" },
+      { icon: "👤", label: "One Account", desc: "Your Dezen identity" },
+    ],
+  },
+  {
+    id: "express",
+    num: "03 / MOVE & DELIVER",
+    title: "DezenExpress — rides and deliveries you can trust",
+    desc: "Book a ride to anywhere in the city or send a package across town. Payments are held securely in escrow via PandaEscrow and only released when the service is complete.",
+    actions: [
+      {
+        label: "Book a Ride →",
+        href: express("/express/customer"),
+        variant: "primary",
+      },
+      {
+        label: "Send a Package →",
+        href: express("/express/customer/book-delivery"),
+        variant: "secondary",
+      },
+      {
+        label: "Become a Rider →",
+        href: express("/express/rider/auth"),
+        variant: "accent",
+      },
+    ],
+    features: [
+      { icon: "🚗", label: "Book a Ride", desc: "Anywhere in the city" },
+      { icon: "📦", label: "Send a Package", desc: "Tracked door-to-door" },
+      { icon: "🔒", label: "Escrow Payment", desc: "PandaEscrow protected" },
+      { icon: "🏍", label: "Become a Rider", desc: "Earn 85% per fare" },
+    ],
+  },
+] as const;
+
 export default function App() {
   const [hovered, setHovered] = useState<string | null>(null);
 
@@ -221,81 +290,56 @@ export default function App() {
         </div>
       </section>
 
-      {/* DezenExpress spotlight */}
-      <section className="py-16 px-6 border-t border-[#1e1e1e]" id="express">
-        <div className="max-w-[1120px] mx-auto">
-          <div className="bg-gradient-to-br from-[#151515] to-[#0e0e0e] border border-[#222] rounded-2xl p-8 md:p-12 flex flex-col md:flex-row items-center gap-8">
-            <div className="flex-1">
-              <div className="text-[11px] font-extrabold text-[#ff3030] tracking-widest mb-3">
-                03 / MOVE & DELIVER
-              </div>
-              <h2 className="text-[clamp(28px,4vw,46px)] font-black tracking-tight mb-4">
-                DezenExpress — rides and deliveries you can trust
-              </h2>
-              <p className="text-[#9b9b9b] mb-6 max-w-lg">
-                Book a ride to anywhere in the city or send a package across
-                town. Payments are held securely in escrow via PandaEscrow and
-                only released when the service is complete.
-              </p>
-              <div className="flex flex-wrap gap-3">
-                <a
-                  href={express("/express/customer")}
-                  className="bg-[#ff3030] text-white text-[14px] font-bold px-6 py-3.5 rounded-xl hover:brightness-110 hover:-translate-y-0.5 transition-all no-underline"
-                >
-                  Book a Ride →
-                </a>
-                <a
-                  href={express("/express/customer/book-delivery")}
-                  className="border border-[#2a2a2a] text-[14px] font-bold px-6 py-3.5 rounded-xl hover:bg-[#181818] transition-all no-underline"
-                >
-                  Send a Package →
-                </a>
-                <a
-                  href={express("/express/rider/auth")}
-                  className="border border-[#ff3030]/30 text-[#ff3030] text-[14px] font-bold px-6 py-3.5 rounded-xl hover:bg-[#ff3030]/10 transition-all no-underline"
-                >
-                  Become a Rider →
-                </a>
-              </div>
-            </div>
-            <div className="grid grid-cols-2 gap-3 shrink-0">
-              {[
-                {
-                  icon: "🚗",
-                  label: "Book a Ride",
-                  desc: "Anywhere in the city",
-                },
-                {
-                  icon: "📦",
-                  label: "Send a Package",
-                  desc: "Tracked door-to-door",
-                },
-                {
-                  icon: "🔒",
-                  label: "Escrow Payment",
-                  desc: "PandaEscrow protected",
-                },
-                {
-                  icon: "🏍",
-                  label: "Become a Rider",
-                  desc: "Earn 85% per fare",
-                },
-              ].map((f) => (
-                <div
-                  key={f.label}
-                  className="bg-[#0f0f0f] border border-[#222] rounded-xl p-4 w-[140px]"
-                >
-                  <div className="text-2xl mb-2">{f.icon}</div>
-                  <p className="text-[13px] font-bold text-[#e0e0e0]">
-                    {f.label}
-                  </p>
-                  <p className="text-[11px] text-[#555] mt-0.5">{f.desc}</p>
+      {/* Product spotlights */}
+      {SPOTLIGHTS.map((p, idx) => (
+        <section
+          key={p.id}
+          className="py-16 px-6 border-t border-[#1e1e1e]"
+          id={p.id}
+        >
+          <div className="max-w-[1120px] mx-auto">
+            <div
+              className={`bg-gradient-to-br from-[#151515] to-[#0e0e0e] border border-[#222] rounded-2xl p-8 md:p-12 flex flex-col items-center gap-8
+                ${idx % 2 === 1 ? "md:flex-row-reverse" : "md:flex-row"}`}
+            >
+              <div className="flex-1">
+                <div className="text-[11px] font-extrabold text-[#ff3030] tracking-widest mb-3">
+                  {p.num}
                 </div>
-              ))}
+                <h2 className="text-[clamp(28px,4vw,46px)] font-black tracking-tight mb-4">
+                  {p.title}
+                </h2>
+                <p className="text-[#9b9b9b] mb-6 max-w-lg">{p.desc}</p>
+                <div className="flex flex-wrap gap-3">
+                  {p.actions.map((a) => (
+                    <a
+                      key={a.label}
+                      href={a.href}
+                      className={`${BUTTON[a.variant]} text-[14px] font-bold px-6 py-3.5 rounded-xl transition-all no-underline`}
+                    >
+                      {a.label}
+                    </a>
+                  ))}
+                </div>
+              </div>
+              <div className="grid grid-cols-2 gap-3 shrink-0">
+                {p.features.map((f) => (
+                  <div
+                    key={f.label}
+                    className="bg-[#0f0f0f] border border-[#222] rounded-xl p-4 w-[140px]"
+                  >
+                    <div className="text-2xl mb-2">{f.icon}</div>
+                    <p className="text-[13px] font-bold text-[#e0e0e0]">
+                      {f.label}
+                    </p>
+                    <p className="text-[11px] text-[#555] mt-0.5">{f.desc}</p>
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
-        </div>
-      </section>
+        </section>
+      ))}
 
       {/* CTA */}
       <section
@@ -328,6 +372,18 @@ export default function App() {
             </a>
             <a href="#how" className="hover:text-white transition-colors">
               How it works
+            </a>
+            <a
+              href={MARKETPLACE_URL}
+              className="hover:text-white transition-colors no-underline"
+            >
+              DezenMart
+            </a>
+            <a
+              href={FOOD_URL}
+              className="hover:text-white transition-colors no-underline"
+            >
+              DezenFoods
             </a>
             <a
               href={express("/express/customer")}

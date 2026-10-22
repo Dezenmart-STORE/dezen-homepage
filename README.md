@@ -6,7 +6,7 @@ Standalone landing page for the Dezen ecosystem. It links out to the three produ
 | ----------------- | ---------------------- | ------------------------------ |
 | DezenMart         | `VITE_MARKETPLACE_URL` | https://dezenmart.com          |
 | DezenFoods        | `VITE_FOOD_URL`        | https://foods.dezenmart.com    |
-| DezenExpress      | `VITE_EXPRESS_URL`     | http://localhost:3000          |
+| DezenExpress      | `VITE_EXPRESS_URL`     | https://express-dezen.netlify.app |
 
 Copy `.env.example` to `.env` and set the URLs for your environment.
 
